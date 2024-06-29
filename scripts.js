@@ -73,7 +73,6 @@ test.check.style.visibility = "hidden";
 //ClickedWord(1);
 
 TextToSpeech("", "en");
-TextToSpeech("hi i am speed", "en")
 
 // ????????????????????????
 //document.getElementById("test_select_type_test").click();
@@ -195,6 +194,8 @@ function TestOptionSelected(option_) {
     })
   } else {
     document.getElementById(`test_option_${option_}`).style = "background-color: rgb(219, 52, 52);";
+    
+    document.getElementById(`test_option_${RightAnswerForOptions+1}`).style = "background-color: greenyellow;";    
     words[ques_id].tested.push({
       date: getCurrentDateTime(),
       result: false
