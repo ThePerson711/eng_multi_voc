@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="screen" id="screen">
+    <div class="main_panel" id="main_panel">
+      <div class="move_list" id="move_list">
+        <!-- ### -->
+        <div class="main_panels" id="add_panel">
+          <p class="add_p">English Words</p>
+          <input id="inp_kr_word" class="add_inp" type="text" placeholder="English">
+          <p class="add_p">English Word`s Description</p>
+          <input id="inp_kr_des" class="add_inp" type="text" placeholder="not necessarily">
+          <p class="add_p">Uzbek Words</p>
+          <input id="inp_uz_word" class="add_inp" type="text" placeholder="Uzbek">
+          <p class="add_p">Uzbek Word`s Description</p>
+          <input id="inp_uz_des" class="add_inp" type="text" placeholder="not necessarily">
+          <button class="add_btn" onclick="AddNewWord();">
+            Add
+          </button>
+        </div>
+        <!-- ### -->
+        <div class="main_panels" id="words_panel">
+          <p class="words_p">English-to-Uzbek</p>
+          <div class="word_top_p">
+            <button class="words_chenge_btn">ENG/UZ</button>
+            <input type="text" class="inp_search_words" placeholder="Search">
+          </div>
+          <div class="words_show_list" id="words_show_list">
+            <div class="word_elem" onclick="ClickedWord(12);">
+              <div class="w_e_left">
+                <p class="lang_word">HABGL</p>
+                <p class="lang_des">sad</p>
+              </div>
+              <div class="w_e_right">
+                <p class="lang_word">koreys</p>
+                <p class="lang_des">..</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ### -->
+        <div class="main_panels" id="test_panel">
+          <div class="test_inner_p">
+            <div class="center"> 
+              <p class="test_in_p">ENG-TO-UZ</p>
+              <input id="test_select_lang_kr_to_uz" type="radio" name="test_select_lang_to" value="KR-TO-UZ" checked>
+            </div>
+            <div class="center">
+              <p class="test_in_p">UZ-TO-ENG</p>
+              <input id="test_select_lang_uz_to_kr" type="radio" name="test_select_lang_to" value="UZ-TO-KR">  
+            </div>
+          </div>
+          <div class="test_inner_p" style="flex-direction: column;">
+            <p>Number of Words</p>
+            <input id="test_select_num" class="test_inp" type="number" name="" id="" min="1" max="100" value="10">
+          </div>
+          <div class="test_inner_p">
+            <div class="center"> 
+              <p class="test_in_p">TODAY</p>
+              <input id="test_select_date_today" type="radio" name="test_select_time_to" value="TODAY" checked>
+            </div>
+            <div class="center">
+              <p class="test_in_p">WEEK</p>
+              <input id="test_select_date_week" type="radio" name="test_select_time_to" value="WEEK">  
+            </div>
+            <div class="center">
+              <p class="test_in_p">ALL</p>
+              <input id="test_select_date_all" type="radio" name="test_select_time_to" value="ALL">  
+            </div>
+            <button class="test_btn_oth">
+              OTHER
+            </button>
+          </div>
+          <div class="test_inner_p">
+            <div class="center">
+              <p class="test_in_p">Card</p>
+              <input id="test_select_type_card" type="radio" name="test_select_type" value="Card" checked>  
+            </div>
+            <div class="center">
+              <p class="test_in_p">Test</p>
+              <input id="test_select_type_test" type="radio" name="test_select_type" value="Card">  
+            </div>
+          </div>
+          <button class="test_btn" onclick="StartTest();">
+            START
+          </button>
+        </div>
+        <!-- ### -->
+        <div class="main_panels" id="word_panel">
+          <p class="add_p">English Words</p>
+          <input id="re_inp_kr_word" class="add_inp" type="text" placeholder="English">
+          <p class="add_p">English Word`s Description</p>
+          <input id="re_inp_kr_des" class="add_inp" type="text" placeholder="not necessarily">
+          <p class="add_p">Uzbek Words</p>
+          <input id="re_inp_uz_word" class="add_inp" type="text" placeholder="Uzbek">
+          <p class="add_p">Uzbek Word`s Description</p>
+          <input id="re_inp_uz_des" class="add_inp" type="text" placeholder="not necessarily">
+          <div class="divf">
+            <button class="add_btn" onclick="DeleteWord();">
+              Delete
+            </button>            
+            <button class="add_btn" onclick="SoundBtn();">
+              Sound
+            </button>
+            <button class="add_btn" onclick="ChangeWord();">
+              Change
+            </button>
+          </div>
+          <p class="add_p">INFO</p>
+          <p class="add_p" id="word_show_date">Add date => </p>
+          <div class="diagramm">
+            <p class="diagramm_p" id="diagramm_fa">false</p>
+            <canvas id="canvas" class="canvas" width="100px" height="100px"></canvas>
+            <p class="diagramm_p" id="diagramm_tr">true</p>
+          </div>
+        </div>
+        <!-- ### -->
+        <div class="main_panels" id="word_panel">
+          <div class="ask" id="test_ask">
+            <div class="ask_word" id="test_ask_word">
+              //
+            </div>
+            <div class="ask_bot_p">
+              <button onclick="CheckTheAnswer();">
+                Check
+              </button>
+              <button onclick="SoundBtn();">
+                Sound
+              </button>
+            </div>
+          </div>
+          <div class="check" id="test_check">
+            <div class="asked_word" id="test_check_word">
+              words
+            </div>
+            <div class="ask_answer" id="test_check_answer">
+              anse
+            </div>
+            <div class="check_p">
+              <button id="test_check_btn_true" onclick="TestCheck(true);">True</button>
+              <button id="test_check_btn_false" onclick="TestCheck(false);">False</button>
+            </div>
+          </div>
+        </div>
+        <!-- ### -->
+        <div class="main_panels" id="word_panel">
+          <div class="div_for_test">
+            <p class="test_test_par" id="test_question">Question</p>
+            <button class="test_test_btn" id="test_option_1" onclick="TestOptionSelected(1)">Option 1</button>
+            <button class="test_test_btn" id="test_option_2" onclick="TestOptionSelected(2)">Option 2</button>
+            <button class="test_test_btn" id="test_option_3" onclick="TestOptionSelected(3)">Option 3</button>
+            <button class="test_test_btn" id="test_option_4" onclick="TestOptionSelected(4)">Option 4</button>
+          </div>
+          <button class="add_btn" onclick="SoundBtn();">
+            Sound
+          </button>
+        </div>
+        <div class="main_panels" id="menu_panel">
+          <p class="menu_panel_par">MENU</p>
+          <button class="menu_panel_btn" onclick="CopyWords();">
+            Copy all words
+          </button>
+          <textarea placeholder="Enter data of words" class="textarea_menu_panel" id="textarea_for_setallwords"></textarea>
+          <button class="menu_panel_btn" onclick="SetAllWords();">
+            SetAllWords
+          </button>
+          <button class="menu_panel_btn" onclick="ResetAllData();">
+            Reset All Data
+          </button>
+              
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="menu_panel" id="menu_panel">
+      <div class="menu_btn" id="menu_btn" onclick="Menu(`menu`);">MENU</div>
+      <div class="menu_btn" id="add_btn" onclick="Menu(`add`);">ADD</div>
+      <div class="menu_btn" id="list_btn" onclick="Menu(`words`);">WORDS</div>
+      <div class="menu_btn" id="test_btn" onclick="Menu(`test`);">TEST</div>
+    </div>
+  </div>
+  <script src="scripts.js"></script>
+</body>
+</html>
