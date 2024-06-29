@@ -47,6 +47,14 @@ let CurentTestNth;
 let option = [];
 let ques_id;
 let RightAnswerForOptions;
+let AboutPage = {
+  Creator: "AkbarShoh_711",
+  data: "29/06/2024",
+  versin: 1.01,
+  about: "For learn new words in english"
+}
+console.log(AboutPage);
+
 if (localStorage.getItem("KR_VOC_MY_ffLS") !== null) {
   words = JSON.parse(localStorage.getItem("KR_VOC_MY_ffLS"));
 }
