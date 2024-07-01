@@ -73,6 +73,8 @@ for (let i = 1; i <= 22; i++) {
 SetDataToLS();*/
 
 Menu("words");
+
+
 //ClickedWord(45);
 //console.table(words[45-1].tested)
 test.ask.style.visibility = "visible";
@@ -85,6 +87,21 @@ TextToSpeech("", "en");
 // ????????????????????????
 //document.getElementById("test_select_type_test").click();
 //StartTest();
+
+//
+function ReturnIndFa(ind_, obj_) {
+  answer_ = {ind: ind_, fa: 0};
+    fa_FT = 0;
+    num_of_tested = 0;
+    obj_.tested.forEach(elem => {
+      num_of_tested++;
+      if (elem.result !== true) {
+        fa_FT++;
+      }
+    });
+    answer_.fa = fa_FT / num_of_tested;
+  return answer_;
+}
 
 //
 function StartTest() {
@@ -107,17 +124,18 @@ function StartTest() {
     CurTest.num = 0;
     CurTest.true = 0;
     CurTest.false = 0;
+    ar_FT = [];
     for (let i = 0; i < words.length; i++) {
       if (test_option.date === "today") {
         if ( daysPassedSince(words[i].date) <= 0) {
-          ar_FT.push(i);
+          ar_FT.push(ReturnIndFa(i,words[i]));
         }
       } else if (test_option.date === "week") {
         if ( daysPassedSince(words[i].date) <= 6) {
-          ar_FT.push(i);
+          ar_FT.push(ReturnIndFa(i,words[i]));
         }
       } else {
-        ar_FT.push(i)
+        ar_FT.push(ReturnIndFa(i,words[i]))
       }
     }
     NewTest();
@@ -164,8 +182,28 @@ function TestTestBegin() {
   function f() { 
 
     if (params.ArrayOfCertainWords.length >= 4) {
-      CurentTestNth = Math.floor(Math.random()*params.ArrayOfCertainWords.length);
+      //CurentTestNth = Math.floor(Math.random()*params.ArrayOfCertainWords.length);
       
+      object_for_time = [];
+      params.ArrayOfCertainWords.forEach(element => {
+        fa_FT = 0;
+        num_of_tested = 0;
+        element.tested.forEach(elem => {
+          num_of_tested++;
+          if (elem.result !== true) {
+            fa_FT++;
+          }
+        });
+        fa_FT = fa_FT / num_of_tested;
+        object_for_time.push(
+          {
+            ind: element.id,
+            fa: fa_FT
+          }
+        );
+      });
+      CurentTestNth = SelectRand(object_for_time);
+
       ques_id = params.ArrayOfCertainWords[CurentTestNth].id;
       CurentSelectedWord = ques_id;
       option = [-1,-1,-1,-1];
@@ -209,6 +247,7 @@ function TestOptionSelected(option_) {
       result: false
     })
   }
+  SetDataToLS();
   for (let i = 1; i<=4; i++) {
     document.getElementById(`test_option_${i}`).disabled = true;
   }
@@ -224,7 +263,7 @@ function NewTest() {
     alert(`Test Finished\nNum${CurTest.num-1}\nTrue${CurTest.true}\nFalse${CurTest.false}`)
     Menu("test")
   } else {
-    CurentSelectedWord = ar_FT[(Math.floor(Math.random()*ar_FT.length))];
+    CurentSelectedWord = SelectRand(ar_FT); // ar_FT[(Math.floor(Math.random()*ar_FT.length))];
     
     if (test_option.lang === "kr-to-uz") {
       document.getElementById("test_ask_word").innerHTML = 
@@ -509,6 +548,65 @@ function getCurrentDateTime() {
       }
     }
 
+    //
+    //
+    //
+    // SHULD BE DELETED 
+    /*let fff = [0,0,0,0,0];
+    for (let i = 1; i <= 5000; i++) {
+      //
+      //
+      object_for_time = [];
+    
+      params_arr = SortArray(words, (document.getElementById("test_select_date_today").checked)?("today"):
+            ((document.getElementById("test_select_date_week").checked)?("week"):
+            (((document.getElementById("test_select_date_all").checked)?("all"):("error")))))
+
+      params_arr.forEach(element => {
+        fa_FT = 0;
+        num_of_tested = 0;
+        element.tested.forEach(elem => {
+          num_of_tested++;
+          if (elem.result !== true) {
+            fa_FT++;
+          }
+        });
+        fa_FT = fa_FT / num_of_tested;
+        object_for_time.push(
+          {
+            ind: element.id,
+            fa: fa_FT
+          }
+        );
+      });
+      fff[CurentTestNth = SelectRand(object_for_time)]++;
+    }
+    console.table(fff)
+    //
+    //
+    console.log("err ==>> \n_")
+    fff = [0,0,0,0,0];
+    for (let i = 1; i <= 5000; i++) {
+    ar_FT = [];
+    for (let i = 0; i < words.length; i++) {
+      if (test_option.date === "today") {
+        if ( daysPassedSince(words[i].date) <= 0) {
+          ar_FT.push(ReturnIndFa(i,words[i]));
+        }
+      } else if (test_option.date === "week") {
+        if ( daysPassedSince(words[i].date) <= 6) {
+          ar_FT.push(ReturnIndFa(i,words[i]));
+        }
+      } else {
+        ar_FT.push(ReturnIndFa(i,words[i]))
+      }
+    }
+    fff[CurentTestNth = SelectRand(object_for_time)]++;
+    }
+
+    console.table(fff)*/
+    ///
+    //
 
     ///
     ///
