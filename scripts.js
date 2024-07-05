@@ -55,8 +55,8 @@ let AboutPage = {
 }
 console.log(AboutPage);
 
-if (localStorage.getItem("KR_VOC_MY_ffLS") !== null) {
-  words = JSON.parse(localStorage.getItem("KR_VOC_MY_ffLS"));
+if (localStorage.getItem("ENG_VOC_MY_ffLS") !== null) {
+  words = JSON.parse(localStorage.getItem("ENG_VOC_MY_ffLS"));
 }
 
 /*
@@ -318,7 +318,7 @@ function CheckTheAnswer() {
 }
 //
 function SetDataToLS() {
-  localStorage.setItem("KR_VOC_MY_ffLS", JSON.stringify(words));
+  localStorage.setItem("ENG_VOC_MY_ffLS", JSON.stringify(words));
 }
 //
 function ShowWords() {
@@ -533,18 +533,18 @@ function getCurrentDateTime() {
     }
 
     function CopyWords() {
-      navigator.clipboard.writeText(JSON.stringify(localStorage.getItem("KR_VOC_MY_ffLS")));
+      navigator.clipboard.writeText(JSON.stringify(localStorage.getItem("ENG_VOC_MY_ffLS")));
     }
 
     function SetAllWords() {
-      localStorage.setItem("KR_VOC_MY_ffLS",(JSON.parse(document.getElementById("textarea_for_setallwords").value)))
+      localStorage.setItem("ENG_VOC_MY_ffLS",(JSON.parse(document.getElementById("textarea_for_setallwords").value)))
     }
 
     function ResetAllData() {
       if (confirm('Are you sure you want to Reset all data?')) {
         // Save it!
         console.log('Thing was saved to the database.');
-        localStorage.removeItem("KR_VOC_MY_ffLS");
+        localStorage.removeItem("ENG_VOC_MY_ffLS");
       }
     }
 
